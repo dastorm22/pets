@@ -30,14 +30,15 @@
                         <div class="mb-4">
                             <label for="pet_type">Tipo de Mascota</label>
                             <select class="form-control" id="pet_type" wire:model='pet_type'>
-                              <option value="Perro">Perro</option>
-                              <option value="Gato">Gato</option>
-                              <option>Hámster</option>
-                              <option>Pájaro</option>
-                              <option>Peces</option>
-                              <option>Conejos</option>
-                              <option>Mini Pig</option>
-                              <option>Hurón</option>
+                                <option value="" disabled>seleccione la especie</option>
+                                <option>Perro</option>
+                                <option>Gato</option>
+                                <option>Hámster</option>
+                                <option>Pájaro</option>
+                                <option>Peces</option>
+                                <option>Conejos</option>
+                                <option>Mini Pig</option>
+                                <option>Hurón</option>
                             </select>
                           </div>
                         <div class="mb-4">

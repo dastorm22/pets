@@ -8,7 +8,7 @@ use App\Models\Pet;
 
 class PetsComponent extends Component
 {
-    public $pet_id, $name_pet, $date_birth_pet, $pet_type, $weight_pet, $breed_pet, $other_breed;
+    public $pet_id, $name_pet, $date_birth_pet, $pet_type, $weight_pet, $breed_pet, $other_breed, $selected_id;
     public $isModalOpen = 0;
 
 
@@ -32,7 +32,7 @@ class PetsComponent extends Component
             'other_breed'       => $this->other_breed,
         ]);
 
-        session()->flash('message', $this->pet_id ? 'Student updated.' : 'Student created.');
+        session()->flash('message', $this->pet_id ? 'Mascota Actualizada' : 'Mascota Registrada.');
 
         $this->closeModalPopover();
         $this->resetCreateForm();
@@ -71,19 +71,36 @@ class PetsComponent extends Component
 
     public function edit($id)
     {
-        $pet = Pet::findOrFail($id);
-        $this->pet = $id;
-        $this->name = $pet->name_pet;
-        $this->email = $pet->weight_pet;
-        $this->mobile = $pet->breed_pet;
+        $pet = Pet::find($id);
+        $this->pet_id = $pet->$id;
+        $this->pet_type = $pet->pet_type;
+        $this->weight_pet = $pet->weight_pet;
+        $this->breed_pet = $pet->breed_pet;
 
-        $this->openModalPopover();
     }
+    public function update()
+    {
+        $this->validate([
+            'selected_id' => 'required|numeric',
+            'name' => 'required|min:5',
+            'email' => 'required|email:rfc,dns'
+        ]);
+        if ($this->selected_id) {
+            $record = Contact::find($this->selected_id);
+            $record->update([
+                'name' => $this->name,
+                'email' => $this->email
+            ]);
+            $this->resetInput();
+            $this->updateMode = false;
+        }
+    }
+
 
     public function delete($id)
     {
         Pet::find($id)->delete();
-        session()->flash('message', 'Studen deleted.');
+        session()->flash('message', 'Mascota Eliminada.');
     }
 
 }

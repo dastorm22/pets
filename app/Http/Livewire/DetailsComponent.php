@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 use App\Models\Pet;
-
-
 use Livewire\Component;
 
 class DetailsComponent extends Component
